@@ -1,6 +1,6 @@
 package pl.wkos.homework82;
 
-import static pl.wkos.homework81.StrUtil.putNewLineAndTabs;
+import static pl.wkos.homework81.StrUtil.*;
 
 public class Student extends Person {
     private Contact contact;

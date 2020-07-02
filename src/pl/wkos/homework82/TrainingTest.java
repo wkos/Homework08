@@ -4,6 +4,10 @@ import static pl.wkos.homework82.StrUtil.*;
 
 public class TrainingTest {
     public static void main(String[] args) {
+        int numberOFGroups = 2;
+        int maxNumberOfStudentsInGroup = 3;
+        Grade[][] grades = new Grade[numberOFGroups][maxNumberOfStudentsInGroup];
+
         Group[] groups = new Group[2];
         groups[0] = new Group(1, "java", 3, 1);
         groups[1] = new Group(2, "C++", 3, 1);
@@ -48,21 +52,24 @@ public class TrainingTest {
                 "Zatorów", contactStudents[2], 2);
         groups[1].addStudent(students[2]);
 
-        groups[0].addGrade(students[0], 5);
-        groups[1].addGrade(students[0], 3);
+        grades[0][0] = new Grade(students[0], groups[0], 5);
+        grades[1][0] = new Grade(students[0], groups[1], 3);
+        //groups[0].addGrade(students[0], 5);
+        //groups[1].addGrade(students[0], 3);
 
         System.out.println(groups[0].toString());
         System.out.println(groups[1].toString());
 
         Student currentStudent = students[0];
         System.out.println(currentStudent.showBasicDataOfStudent());
-        showStudentsGrades(currentStudent, groups);
+        showStudentsGrades(currentStudent, grades);
     }
 
-    public static void showStudentsGrades(Student student, Group[] groups) {
+    public static void showStudentsGrades(Student student, Grade[][] grades) {
         String buffer = "";
-        for (Group item : groups)
-            if (item.studentExist(student))
-                System.out.printf("\t%-10s%d\n", item.getSubject(), item.getGrade(student));
+        for (Grade[] itemGroup : grades)
+            for (Grade itemStudent : itemGroup)
+                if (itemStudent!=null && itemStudent.getStudent() == student)
+                    System.out.printf("\t%-20s%d\n", itemStudent.getGroup().getSubject(), itemStudent.getGrade());
     }
 }
