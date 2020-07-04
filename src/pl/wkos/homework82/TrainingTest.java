@@ -6,7 +6,6 @@ public class TrainingTest {
     public static void main(String[] args) {
         int numberOFGroups = 2;
         int maxNumberOfStudentsInGroup = 3;
-        Grade[] grades = new Grade[numberOFGroups * maxNumberOfStudentsInGroup];
 
         Group[] groups = new Group[2];
         groups[0] = new Group(1, "java", 3, 1);
@@ -35,13 +34,13 @@ public class TrainingTest {
         contactStudents[0] = new Contact("babacki@gmail.com", "222222222",
                 "Czerwona 22/2", "Ostrów", "62-400");
         students[0] = new Student("Marek", "Babacki", "20.04.1989",
-                "Ostrów", contactStudents[1], 2);
+                "Ostrów", contactStudents[1], 2, 5);
         groups[0].addStudent(students[0]);
 
         contactStudents[1] = new Contact("cabacka@gmail.com", "333333333",
                 "Brązowa 33/3", "Malanów", "62-405");
         students[1] = new Student("Ewa", "Cabacka", "14.04.2001",
-                "Malanów", contactStudents[1], 2);
+                "Malanów", contactStudents[1], 2, 5);
         groups[0].addStudent(students[1]);
 
         groups[1].addStudent(students[0]);
@@ -49,25 +48,25 @@ public class TrainingTest {
         contactStudents[2] = new Contact("ebacka@gmail.com", "555555555",
                 "Biała 55/5", "Zatorów", "62-435");
         students[2] = new Student("Ela", "Ebacka", "14.04.2001",
-                "Zatorów", contactStudents[2], 2);
+                "Zatorów", contactStudents[2], 2, 5);
         groups[1].addStudent(students[2]);
 
-        grades[0] = new Grade(students[0], groups[0], 5);
-        grades[1] = new Grade(students[0], groups[1], 3);
-        grades[2] = new Grade(students[1], groups[0], 4);
+        students[0].addGrade(groups[0], 5);
+        students[0].addGrade(groups[1], 3);
+        students[1].addGrade(groups[0], 4);
 
         System.out.println(groups[0].toString());
         System.out.println(groups[1].toString());
 
         Student currentStudent = students[0];
         System.out.println(currentStudent.showBasicDataOfStudent());
-        showStudentsGrades(currentStudent, grades);
+        showStudentsGrades(currentStudent);
     }
 
-    public static void showStudentsGrades(Student student, Grade[] grades) {
+    public static void showStudentsGrades(Student student) {
         String buffer = "";
-        for (Grade item : grades)
-            if (item != null && item.getStudent() == student)
+        for (Grade item : student.getGrades())
+            if (item != null)
                 System.out.printf("\t%-20s%d\n", item.getGroup().getSubject(), item.getGrade());
     }
 }
