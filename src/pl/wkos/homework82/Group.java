@@ -4,7 +4,6 @@ public class Group {
     private int groupId;
     private String subject;
     private Student[] students;
-    private int[] studentGrades;
     private Trainer[] trainers;
 
     public Student getStudent(int i) {
@@ -24,7 +23,6 @@ public class Group {
         this.subject = subject;
         this.students = new Student[sizeOfStudents];
         this.trainers = new Trainer[sizeOfTrainers];
-        this.studentGrades = new int[sizeOfStudents];
     }
 
     public void addStudent(Student student) {
@@ -47,16 +45,6 @@ public class Group {
         int i = 0;
         while (i < students.length && students[i] != student) i++;
         return i < students.length ? i : -1;
-    }
-
-    public void addGrade(Student student, int grade) {
-        if (getIndexOfStudent(student) < 0) System.out.println("Nie ma takiego studenta");
-        else studentGrades[getIndexOfStudent(student)] = grade;
-    }
-
-    public int getGrade(Student student) {
-        if (getIndexOfStudent(student) < 0) return -1;
-        else return studentGrades[getIndexOfStudent(student)];
     }
 
     public void addTrainer(Trainer trainer) {
@@ -84,5 +72,9 @@ public class Group {
             if (item != null)
                 buffer += item.toString() + "\n\t\t\t";
         return buffer;
+    }
+
+    public int getGroupId() {
+        return groupId;
     }
 }

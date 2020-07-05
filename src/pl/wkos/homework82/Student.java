@@ -5,7 +5,6 @@ import static pl.wkos.homework81.StrUtil.*;
 public class Student extends Person {
     private Contact contact;
     private Grade[] grades;
-    private int currentGrade;
     private int term;
 
     public Student(String firstName, String lastName, String dateOfBirth,
@@ -13,12 +12,11 @@ public class Student extends Person {
         super(firstName, lastName, dateOfBirth, placeOfBirth);
         this.contact = contact;
         this.term = term;
-        this.currentGrade = 0;
         this.grades = new Grade[numberOfSubjects];
     }
 
     public void addGrade(Group group, int grade) {
-        grades[currentGrade++] = new Grade(this, group, grade);
+        grades[group.getGroupId()] = new Grade(this, group, grade);
     }
 
     public String showBasicDataOfStudent() {
